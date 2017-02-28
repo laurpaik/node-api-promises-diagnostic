@@ -1,5 +1,5 @@
 {
-  "name": "ga-wdi-boston.node-template",
+  "name": "ga-wdi-boston.node-api-promises-diagnostic",
   "version": "0.1.0",
   "private": true,
   "scripts": {
