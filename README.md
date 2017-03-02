@@ -43,6 +43,43 @@ some of the most common sources of errors.
 
 Test your code by running `grunt test`.
 
+
+## Other Notes on another solution that wasn't done in Rachel's review:
+```javascript
+// this is the one that's closer to the solution branch
+// tbh this is just a condensed version of Rachel's solution
+const sumLines = (filename) => // we don't open curly braces here
+// implicit return at the end because of no curly brace, I think
+  new Promise((resolve, reject) => {
+    // let's read a file <3
+    fs.readFile(filename, { encoding: 'utf8' }, (err, data) => {
+      // again, start line number as 0
+      let lno = 0;
+      // define sum as all the data in the file we read
+      // but split by line
+      // reduce it down
+      let sum = data.split('\n').reduce((prev, curr, i) => {
+        lno = i;
+        return prev + (+curr);
+      }, 0);
+      // define the error, same as in Rachel's solution
+      let error = isNaN(sum) && new Error(`line ${lno}: not a number`);
+      // if we hit an error, the promise gets rejected!
+      if (error) {
+        reject(error);
+      }
+      // if we don't hit an error, then we resolve it
+      // with whatever sum returns
+      resolve(sum);
+    });
+  });
+  // up until it's done reading the file
+  // and finding out if there's an error,
+  // the promise is unfulfilled!
+  // line 69(ayy) and 73 just tell us
+  // what the function will do when it's ready!
+```
+
 ## [License](LICENSE)
 
 1.  All content is licensed under a CC­BY­NC­SA 4.0 license.
